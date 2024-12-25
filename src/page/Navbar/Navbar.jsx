@@ -1,10 +1,16 @@
 import { Button } from "@/components/ui/button";
-import { SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-// import { Sheet } from "lucide-react";
+import {
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { Sheet } from "@/components/ui/sheet";
-import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { GripHorizontal } from "lucide-react";
 import React from "react";
+import Sidebar from "./Sidebar";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 const Navbar = () => {
   return (
@@ -12,31 +18,58 @@ const Navbar = () => {
       <div className="flex items-center gap-3">
         <Sheet>
           <SheetTrigger>
-                <Button variant="ghost" size="icon" className="rounded-full h-11 w-11">
-                        {/* <DragHandlerHorizontalIcon className='' /> */}
-                        <GripHorizontal className='h-7 w-7' />
-                </Button>
-            </SheetTrigger>
-          <SheetContent side="left" className="w-72 border-r-0 flex flex-col justify-center">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="rounded-full h-11 w-11"
+            >
+              {/* <DragHandlerHorizontalIcon className='' /> */}
+              <GripHorizontal className="h-7 w-7" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent
+            side="left"
+            className="w-72 border-r-0 flex flex-col justify-center"
+          >
             <SheetHeader>
               <SheetTitle>
-                  <div className="text-3xl flex justify-center items-center gap-1">
-                      <Avatar >
-                          <AvatarImage src="https://png.pngtree.com/png-vector/20230831/ourmid/pngtree-man-avatar-image-for-profile-png-image_9197908.png" />
-                      </Avatar>
+                <div className="text-3xl flex justify-center items-center gap-1">
+                  <Avatar>
+                    <AvatarImage src="https://png.pngtree.com/png-vector/20230831/ourmid/pngtree-man-avatar-image-for-profile-png-image_9197908.png" />
+                  </Avatar>
 
-                      <div>
-                        <span className="fondt-bold text-orange-700">Cryto</span>
-                        <span>Trading</span>
-                      </div>
+                  <div>
+                    <span className="fondt-bold text-orange-700">Cryto</span>
+                    <span>Trading</span>
                   </div>
-
+                </div>
               </SheetTitle>
-             
             </SheetHeader>
+
+              <Sidebar />
+            
           </SheetContent>
         </Sheet>
+
+        <p className="text-sm lg:text-base cursor-pointer">
+          Crypto Trading
+        </p>
+
+        <div className="p-0 ml-9">
+          <Button variant="outline" className="flex items-center gap-3">
+            <MagnifyingGlassIcon />
+            <span>  Search </span>  
+          </Button>
+        </div>
       </div>
+
+      {/* ---------------------------------------------------- */}
+      <div>
+        <Avatar >
+            <AvatarFallback>Z</AvatarFallback>
+        </Avatar>
+      </div>
+
     </div>
   );
 };
