@@ -3,15 +3,37 @@ import { Button } from "@/components/ui/button";
 import AssetTable from "./AssetTable";
 import StockChart from "./StockChart";
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
-import { CrossIcon, DotIcon, MessageCircle } from "lucide-react";
+import {  DotIcon, MessageCircle } from "lucide-react";
 import { Cross1Icon } from "@radix-ui/react-icons";
+import { Input } from "@/components/ui/input"
+
+
 
 const Home = () => {
   const [category, setCategory] = React.useState("all");
+  const [inputValue,setInputValue] = React.useState(" ");
+  const [isBotRealse,setIsBotRelease] = React.useState(false); 
+  
+  const handleBotRelease = ()=>{
+    console.log("-----------------------------")
+    setIsBotRelease(!isBotRealse)};
 
   const handleCategory = (value) => {
     setCategory(value);
   };
+
+  const handleChange  = (e) =>{
+    setInputValue(e.target.value)
+  }
+
+  const handleKeyPress = (event) =>{
+        if(event.key=="Enter"){
+            console.log(inputValue);
+            
+        }
+
+        setInputValue("")
+  }
 
   return (
     <div className="relative">
@@ -91,10 +113,10 @@ const Home = () => {
 
       <section className="absolute bottom-5 right-5 z-40 flex flex-col justify-end items-end gap-2">
         {/* div for opening chat  */}
-        <div className="rounded-md w-[20rem] md:w-[25rem] lg:[25rem] h-[70vh] bg-slate-900">
+        {isBotRealse && <div className="rounded-md w-[20rem] md:w-[25rem] lg:[25rem] h-[70vh] bg-slate-900">
           <div className="flex justify-between items-center border-b px-6 h-[12%]">
             <p>ChatBot</p>
-            <Button variant="ghost" size="icon">
+            <Button onClick = {handleBotRelease} variant="ghost" size="icon">
               <Cross1Icon />
             </Button>
           </div>
@@ -108,22 +130,37 @@ const Home = () => {
               </div>
             </div>
 
-            <div className={`${true ? "self-end" : "self-start"} pb-5 w-auto`}>
+            {[1, 1, 1, 1, 1].map((item, index) => (
+              <div
+                key={index}
+                className={`${
+                  index % 2 == 0 ? "self-end" : "self-start"
+                } pb-5 w-auto`}
+              >
+                {item % 2 == 0 ? (
+                  <div className="justify-end self-end px-5 py-2 rounded-md bg-slate-800 w-auto text-right">
+                    <p>prompt Who are you</p>
+                  </div>
+                ) : (
+                  <div className="justify-end self-end px-5 py-2 rounded-md bg-slate-800 w-auto text-right">
+                    <p>ans Hi, Babu Bhaiya</p>
+                  </div>
+                )}
+              </div>
+            ))}
 
-    <div className='justify-end self-end px-5 py-2 rounded-md bg-slate-800 w-auto text-right'>
-        <p>prompt Who are you</p>
-    </div>
-
-    <div className='justify-end self-end px-5 py-2 rounded-md bg-slate-800 w-auto text-right'>
-        <p>ans Hi, Babu Bhaiya</p>
-    </div>
-
-</div>
           </div>
-        </div>
+
+            <div className="h-[12%] border-t">
+                    <Input className="w-full h-full order-none outline-none" placeholder="write prompt" onChange={handleChange} value={inputValue} onKeyPress={handleKeyPress}/>
+            </div>
+
+        </div>}
 
         <div className="relative w-[10rem] cursor-pointer group">
-          <Button className="w-full h-[3rem] gap-2 items-center">
+          <Button 
+          onClick = {handleBotRelease}
+          className="w-full h-[3rem] gap-2 items-center">
             <MessageCircle
               size={30}
               className="fill-[#1e293b] -rotate-90 stroke-none group-hover:fill:[#1a1a1a]"
