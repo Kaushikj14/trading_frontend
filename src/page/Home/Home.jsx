@@ -15,7 +15,6 @@ const Home = () => {
   const [isBotRealse,setIsBotRelease] = React.useState(false); 
   
   const handleBotRelease = ()=>{
-    console.log("-----------------------------")
     setIsBotRelease(!isBotRealse)};
 
   const handleCategory = (value) => {

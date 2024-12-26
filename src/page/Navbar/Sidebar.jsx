@@ -16,6 +16,7 @@ import {
   ExitIcon,
   PersonIcon,
 } from "@radix-ui/react-icons";
+import { useNavigate } from "react-router-dom";
 
 const menu = [
   { name: "Home", path: "/", icon: <HomeIcon className="h-2 w-2" /> },
@@ -53,14 +54,22 @@ const menu = [
   { name: "Logout", path: "/", icon: <ExitIcon className="h-2 w-2" /> },
 ];
 const Sidebar = () => {
+
+  const navigate = useNavigate();
+
+  
+
+
+
   return (
     <div className="mt-10 space-y-5 h-[calc(75vh-40px)] ">
       {menu.map((item) => (
         <div>
-          <SheetClose className="w-full">
+          <SheetClose className="w-full ">
             <Button
               variant="outline"
-              className="flex items-center gap-5 py-6 w-full"
+              className="flex items-center gap-5 py-6 w-full "
+              onClick = {()=>navigate(item.path)}
             >
               <span className="w-8">
                 {item.icon}
