@@ -40,3 +40,15 @@
 .read-the-docs {
   color: #888;
 }
+
+
+/* Smooth scrolling and hide scrollbar */
+.sidebar-scroll {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scroll-behavior: smooth;
+}
+
+.sidebar-scroll::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari */
+}
