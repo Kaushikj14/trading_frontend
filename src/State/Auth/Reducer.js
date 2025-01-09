@@ -1,4 +1,4 @@
-import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER_FAILURE } from "./ActionTypes";
+import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER_FAILURE, LOGOUT } from "./ActionTypes";
 
 const initialState = {
     user: null,
@@ -18,7 +18,7 @@ const authReducer = (state = initialState, action) => {
         case REGISTER_SUCCESS:
         case LOGIN_SUCCESS:
         case GET_USER_SUCCESS:
-            return { ...state, loading: false, error: null, jwt: action.payload }
+            return  { ...state, user: action.payload, loading: false, error: null };
 
         case REGISTER_FAILURE:
         case LOGIN_FAILURE:
@@ -26,6 +26,9 @@ const authReducer = (state = initialState, action) => {
 
         case GET_USER_FAILURE:
             return { ...state, user: action.payload, loading: false, error: null }
+
+        case LOGOUT:
+               return initialState 
 
         default:
             return state;

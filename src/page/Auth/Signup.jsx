@@ -10,9 +10,15 @@ import {
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { DialogClose } from "@/components/ui/dialog";
+import { useDispatch } from "react-redux";
+import { register } from "@/State/Auth/Action";
+import axios from 'axios';
 
 const Signup = () => {
+
+  const dispatch = useDispatch();
+
+
   const form = useForm({
     resolve: "",
     defaultValues: {
@@ -23,6 +29,7 @@ const Signup = () => {
   });
 
   const onSubmit = (data) => {
+    dispatch(register(data));
     console.log(data);
   };
 
