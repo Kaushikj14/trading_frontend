@@ -1,4 +1,5 @@
 
+import { Navigate } from "react-router-dom";
 import { GET_USER_FAILURE, GET_USER_REQUEST, GET_USER_SUCCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT, REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS } from "./ActionTypes";
 import axios from 'axios';
 
@@ -47,7 +48,7 @@ export const login = (userData) => async (dispatch) => {
 
     try {
         // Send POST request to the signup endpoint with user registration data
-        const response = await axios.post(`${baseUrl}/auth/signin`, userData);
+        const response = await axios.post(`${baseUrl}/auth/signin`, userData.data);
 
         // Extract the user data (including jwt token) from the response
         const user = response.data;
@@ -58,6 +59,7 @@ export const login = (userData) => async (dispatch) => {
         // Dispatch LOGIN_SUCCESS and pass the jwt token as payload
         dispatch({ type: LOGIN_SUCCESS, payload: user.jwt });
         localStorage.setItem("jwt",user.jwt);
+        userData.navigate("/")
  
         
     } catch (error) {

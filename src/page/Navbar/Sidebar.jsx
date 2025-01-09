@@ -103,6 +103,8 @@ import {
   PersonIcon,
 } from "@radix-ui/react-icons";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "@/State/Auth/Action";
 
 const menu = [
   { name: "Home", path: "/", icon: <HomeIcon className="h-4 w-4" /> },
@@ -142,6 +144,11 @@ const menu = [
 
 const Sidebar = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogout = ()=>{
+    dispatch(logout())
+  }
 
   return (
     <div className="mt-10 space-y-5 max-h-[calc(100vh-80px)] overflow-y-auto sidebar-scroll">
@@ -151,7 +158,14 @@ const Sidebar = () => {
             <Button
               variant="outline"
               className="flex items-center gap-5 py-5 w-full"
-              onClick={() => navigate(item.path)}
+              onClick={
+                () => {
+                  navigate(item.path)
+                  if(item.name=="Logout"){
+                    handleLogout();
+                  }
+                }
+              }
             >
               <span className="w-8">{item.icon}</span>
               <p>{item.name}</p>

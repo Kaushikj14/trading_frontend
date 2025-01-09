@@ -12,10 +12,12 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useDispatch } from "react-redux";
 import { login } from "@/State/Auth/Action";
+import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
 
   const dispatch = useDispatch();
+  const navigate  = useNavigate();
 
   const form = useForm({
     resolve: "",
@@ -26,7 +28,7 @@ const Signin = () => {
   });
 
   const onSubmit = (data) => {
-    dispatch(login(data));
+    dispatch(login({data,navigate}));
     console.log(data);
   };
 
