@@ -11,8 +11,13 @@ import { GripHorizontal } from "lucide-react";
 import React from "react";
 import Sidebar from "./Sidebar";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+
+  const {auth} = useSelector(store=>store);
+
+
   return (
     // <div className="px-2 py-3 border-b bg-background bg-opacity-0 sticky top-0 left-0 right-0 flex justify-between items-center">
     <div className="px-2 py-2 border-b bg-background sticky top-0 left-0 right-0 flex justify-between items-center z-50  shadow-md">
@@ -67,7 +72,7 @@ const Navbar = () => {
       {/* ---------------------------------------------------- */}
       <div>
         <Avatar >
-            <AvatarFallback>Z</AvatarFallback>
+            <AvatarFallback>{auth.user?.fullName[0].toUpperCase()}</AvatarFallback>
         </Avatar>
       </div>
 

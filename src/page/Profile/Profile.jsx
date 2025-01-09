@@ -6,8 +6,12 @@ import { Dialog } from "@radix-ui/react-dialog";
 import { VerifiedIcon } from "lucide-react";
 import React from "react";
 import AccountVerificationForm from "./AccountVerificationForm";
+import { useSelector } from "react-redux";
+import { store } from "@/State/Store";
 
 const Profile = () => {
+
+  const {auth} = useSelector(store=>store);
 
  const  handleEnableTwoStepVerification = ()=>{
   console.log("2 step verificaion");
@@ -29,13 +33,13 @@ const Profile = () => {
                 {/* for email */}
                 <div className="flex">
                   <p className="w-[9rem] text-left">Email :</p>
-                  <p className="text-gray-500">demo@gmail.com</p>
+                  <p className="text-gray-500">{auth.user?.email}</p>
                 </div>
 
                 {/*  */}
                 <div className="flex">
                   <p className="w-[9rem] text-left">Full Name :</p>
-                  <p className="text-gray-500">demo</p>
+                  <p className="text-gray-500">{auth.user?.fullName}</p>
                 </div>
 
                 {/*  */}
