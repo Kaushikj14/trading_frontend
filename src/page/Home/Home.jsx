@@ -6,9 +6,9 @@ import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 import {  DotIcon, MessageCircle } from "lucide-react";
 import { Cross1Icon } from "@radix-ui/react-icons";
 import { Input } from "@/components/ui/input"
-import { getCoinList } from "@/State/Coin/Action";
+import { getCoinList, getTop50CoinList, } from "@/State/Coin/Action";
 import { useDispatch, useSelector } from "react-redux";
-import { store } from "@/State/Store";
+// import { store } from "@/State/Store";
 
 
 
@@ -16,7 +16,9 @@ const Home = () => {
   const [category, setCategory] = React.useState("all");
   const [inputValue,setInputValue] = React.useState(" ");
   const [isBotRealse,setIsBotRelease] = React.useState(false);
-  const {coin} = useSelector(store=>store);
+  const {coin} = useSelector(store => store);
+ 
+  
   const dispatch = useDispatch();
 
   
@@ -34,16 +36,18 @@ const Home = () => {
   const handleKeyPress = (event) =>{
         if(event.key=="Enter"){
             console.log(inputValue);
-            
         }
-
         setInputValue("")
   }
 
 
   useEffect(()=>{
+    dispatch(getTop50CoinList())
+  },[category]);
+
+  useEffect(()=>{
     dispatch(getCoinList(1))
-  },[])
+  },[]);
 
 
   return (
@@ -87,7 +91,7 @@ const Home = () => {
               Top Losers
             </Button>
           </div>
-          <AssetTable coin={coin.coinList} category={category} />
+          <AssetTable coin={category==="all"?coin.coinList:coin.top50} category={category} />
         </div>
 
         <div className="hidden lg:block lg:w-[50%] p-5">

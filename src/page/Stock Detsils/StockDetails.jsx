@@ -51,7 +51,7 @@ const StockDetails = () => {
 
           <div>
             <div className="flex items-center gap-2">
-              <p>{coin.coinDetails?.symbol}</p>
+              <p>{coin.coinDetails?.symbol.toUpperCase()}</p>
               <DotIcon className="text-gray-400" />
               <p className="text-gray-400">{coin.coinDetails?.name}</p>
             </div>

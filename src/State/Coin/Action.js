@@ -34,12 +34,16 @@ export const getCoinList = (page) => async (dispatch) => {
     }
 };
 
-export const getTop50COinList = () => async (dispatch) => {
+export const getTop50CoinList = () => async (dispatch) => {
+
+    const baseUrl = "http://localhost:5454";
 
     dispatch({ type: FETCH_TOP_50_COINS_REQUEST });
 
     try {
-        const response = await axios.get(`${API_BASE_URL}/coins/top50`);
+         const response = await axios.get(`${baseUrl}/coins/top50`);
+        console.log("Pritnig data from fucntion get top 50 coins",response.data);
+        
         dispatch({ type: FETCH_TOP_50_COINS_SUCCESS, payload:response.data  });
         
     } catch (error) {
