@@ -7,13 +7,20 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { getCoinList } from "@/State/Coin/Action";
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const AssetTable = () => {
+const AssetTable = ({coin,category}) => {
+
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
+
+
+ 
 
   return (
     <div>
@@ -29,22 +36,22 @@ const AssetTable = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {[1,1,1,1,1,1,1,1,1,1].map((items,index)=><TableRow key={index}>
+          {coin.map((items,index)=><TableRow key={items.id}>
             <TableCell onClick={()=>navigate(`/market/bitcoin`)} className="font-medium cursor-pointer">
               <div className="flex items-center gap-2">
                 <Avatar className="w-8 h-8">
-                  <AvatarImage src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png" />
+                  <AvatarImage src={items.image} />
                 </Avatar>
-                <span>BitCoin</span>
+                <span>{items.name}</span>
               </div>
             </TableCell>
 
-            <TableCell>BTC</TableCell>
-            <TableCell>98762543</TableCell>
-            <TableCell>1276376872</TableCell>
-            <TableCell>-0.2009</TableCell>
+            <TableCell>{items.symbol}</TableCell>
+            <TableCell>{items.total_volume}</TableCell>
+            <TableCell>{items.market_cap}</TableCell>
+            <TableCell>{items.price_change_percentage_24h}</TableCell>
 
-            <TableCell className="text-right">$69295</TableCell>
+            <TableCell className="text-right">${items.current_price}</TableCell>
           </TableRow>)}
         </TableBody>
       </Table>
