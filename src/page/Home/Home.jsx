@@ -91,11 +91,11 @@ const Home = () => {
               Top Losers
             </Button>
           </div>
-          <AssetTable coin={category==="all"?coin.coinList:coin.top50} category={category} />
+          <AssetTable coin={category=="all"?coin.coinList:coin.top50} category={category} />
         </div>
 
         <div className="hidden lg:block lg:w-[50%] p-5">
-          <StockChart />
+          <StockChart coinId={"bitcoin"} />
           <div className="flex gap-5 items-center">
             <div>
               <Avatar>

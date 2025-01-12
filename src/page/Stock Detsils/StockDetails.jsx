@@ -26,7 +26,7 @@ const StockDetails = () => {
 
   const {id} = useParams();
 
-  // console.log("params",params);
+  // console.log("params",id);
   
 
   useEffect(()=>{
@@ -97,7 +97,7 @@ const StockDetails = () => {
 
       {/* Chart */}
       <div className="mt-14">
-        <StockChart />
+        <StockChart coinId={id} />
       </div>
     </div>
   );
