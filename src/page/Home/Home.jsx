@@ -9,6 +9,16 @@ import { Input } from "@/components/ui/input"
 import { getCoinList, getTop50CoinList, } from "@/State/Coin/Action";
 import { useDispatch, useSelector } from "react-redux";
 // import { store } from "@/State/Store";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination"
+
 
 
 
@@ -92,7 +102,28 @@ const Home = () => {
             </Button>
           </div>
           <AssetTable coin={category=="all"?coin.coinList:coin.top50} category={category} />
+          <div>
+        <Pagination>
+  <PaginationContent>
+    <PaginationItem>
+      <PaginationPrevious href="#" />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#">1</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationEllipsis />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationNext href="#" />
+    </PaginationItem>
+  </PaginationContent>
+</Pagination>
+
         </div>
+        </div>
+
+
 
         <div className="hidden lg:block lg:w-[50%] p-5">
           <StockChart coinId={"bitcoin"} />
