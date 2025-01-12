@@ -2,8 +2,16 @@ import React from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { DialogClose } from "@radix-ui/react-dialog";
+import { useDispatch, useSelector } from "react-redux";
+import { getWalletTransaction } from "@/State/Wallet/Action";
 
 const WihdrawalForm = () => {
+
+  
+  const dispatch = useDispatch();
+  const {wallet} = useSelector(store => store);
+
+
   const [amount, setAmount] = React.useState("");
 
   const handleSubmit = (e) => {};
@@ -11,6 +19,8 @@ const WihdrawalForm = () => {
   const handleChange = (e) => {
     setAmount(e.target.value);
   };
+
+  
 
   return (
     <div className="pt-10  space-y-5">
