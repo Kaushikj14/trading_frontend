@@ -1,7 +1,6 @@
-const { error } = require("console");
-const { WITHDRWAL_REQUEST, WITHDRWAL_PROCEED_REQUEST, GET_WITHDRWAL_REQUEST_REQUEST, GET_WITHDRWAL_HISTORY_REQUEST, WITHDRWAL_SUCCESS, ADD_PAYMENT_DETAILS_REQUEST, ADD_PAYMENT_DETAILS_SUCCESS, GET_PAYMENT_DETAILS_SUCCESS, WITHDRWAL_PROCEED_SUCCESS, GET_WITHDRWAL_HISTORY_SUCCESS } = require("./ActionTypes");
-const { default: PaymentDetails } = require("@/page/Payment Details/PaymentDetails");
-const { request } = require("http");
+import  { WITHDRWAL_REQUEST, WITHDRWAL_PROCEED_REQUEST, GET_WITHDRWAL_REQUEST_REQUEST, GET_WITHDRWAL_HISTORY_REQUEST, WITHDRWAL_SUCCESS, ADD_PAYMENT_DETAILS_REQUEST, ADD_PAYMENT_DETAILS_SUCCESS, GET_PAYMENT_DETAILS_SUCCESS, WITHDRWAL_PROCEED_SUCCESS, GET_WITHDRWAL_HISTORY_SUCCESS, GET_WITHDRWAL_REQUEST_SUCCESS, WITHDRWAL_FAILURE, WITHDRWAL_PROCEED_FAILURE, GET_WITHDRWAL_HISTORY_FAILURE, GET_WITHDRWAL_REQUEST_FAILURE } from "./ActionTypes";
+import PaymentDetails from "@/page/Payment Details/PaymentDetails";
+
 
 const initialState = {
     withdrawal : null,
@@ -55,11 +54,30 @@ const withdrawalReducer = (state = initialState,action)=>{
         case GET_WITHDRWAL_HISTORY_SUCCESS:
             return {
                 ...state,
-                requests: state.request.map((item)=>{
-                    item.id == action.payload.id ? action.payload : item
-                }),
+                history:action.payload,
                 loading: false,
                 error: null,
             };        
+            case GET_WITHDRWAL_REQUEST_SUCCESS:
+                return {
+                    ...state,
+                    request:action.payload,
+                    loading: false,
+                    error: null,
+                };        
+            case WITHDRWAL_FAILURE:
+            case WITHDRWAL_PROCEED_FAILURE:
+            case GET_WITHDRWAL_HISTORY_FAILURE:
+            case GET_WITHDRWAL_REQUEST_FAILURE:
+                return {
+                    ...state,
+                    loading:false,
+                    error:action.payload,
+                }    
+            
+            default:
+                return state;    
     }
 }
+
+export default withdrawalReducer;
