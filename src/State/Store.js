@@ -16,6 +16,7 @@ const rootReducer = combineReducers({
     withdrawal: withdrawalReducer,
     order:orderReducer,
     asset : assetReducer,
+    watchlist : walletReducer
 });
 
 export const store = legacy_createStore(rootReducer,applyMiddleware(thunk));

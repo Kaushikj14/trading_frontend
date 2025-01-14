@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { BookmarkFilledIcon } from '@radix-ui/react-icons'
 import { Button } from '@/components/ui/button'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllOrderForUser } from '@/State/Order/Action'
 
 const Activity = () => {
+
+  const dispatch = useDispatch();
+
+  const {order} = useSelector(store=>store); 
+
+  useEffect(()=>{
+      dispatch(getAllOrderForUser({jwt:localStorage.getItem("jwt")},))
+  },[])
+
   return (
     <div className='p-5 lg:p-20'>
               <h1 className='font-bold text-3xl pb-5'>Activity</h1>
@@ -22,7 +33,7 @@ const Activity = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {[1,1,1,1,1,1,1,1,1,1].map((items,index)=><TableRow key={index}>
+                  {order.orders.map((items,index)=><TableRow key={index}>
                     
                     <TableCell>
                           <p>2024/05/31</p>
