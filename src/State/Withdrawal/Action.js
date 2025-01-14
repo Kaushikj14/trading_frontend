@@ -43,7 +43,7 @@ export const getWithdrawalHistory = (jwt) => async (dispatch) =>{
     dispatch({type:GET_WITHDRWAL_HISTORY_REQUEST});
 
     try {
-        const response = await api.get(`/api/withdrawal/`,{headers:{Authorization:`Bearer ${jwt}`}});
+        const response = await axios.get(`http://localhost:5454/api/withdrawal`,{headers:{Authorization:`Bearer ${jwt}`}});
         console.log("get Withdrawal history -------------",response.data);
         dispatch({
             type:GET_WITHDRWAL_HISTORY_SUCCESS,

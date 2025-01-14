@@ -1,10 +1,21 @@
-import React from 'react'
-import { Avatar, AvatarImage } from '@/components/ui/avatar'
+import React, { useEffect } from 'react'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { BookmarkFilledIcon } from '@radix-ui/react-icons'
-import { Button } from '@/components/ui/button'
+import { useDispatch, useSelector } from 'react-redux'
+import { getWalletTransaction } from '@/State/Wallet/Action';
+import { getWithdrawalHistory } from '@/State/Withdrawal/Action';
+
 
 const Withdrawal = () => {
+
+  const {wallet,withdrawal} = useSelector(store=>store);
+  const dispatch = useDispatch();
+
+
+  useEffect(()=>{
+    dispatch(getWithdrawalHistory(localStorage.getItem("jwt")));
+    
+  },[])
+
   return (
      <div className='p-5 lg:p-20'>
                   <h1 className='font-bold text-3xl pb-5'>Withdrwal</h1>
@@ -19,22 +30,22 @@ const Withdrawal = () => {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {[1,1,1,1,1,1,1,1,1,1].map((items,index)=><TableRow key={index}>
+                      {withdrawal.history.map((items,index)=><TableRow key={index}>
                         
                         <TableCell>
-                              <p>2024/05/31</p>
+                              <p>{items.date.toString()}</p>
                         </TableCell>
                       
             
                         <TableCell>Bank</TableCell>
                   
             
-                        <TableCell >$69295</TableCell>
+                        <TableCell >${items.amount}</TableCell>
                         <TableCell className="text-center">
                                 {/* <Button variant="ghost" onClick={()=>handleRemoveToWatchlist(items.id)} size="icon" className="h-10 w-10">
                                     <BookmarkFilledIcon className='w-6 h-6' />
                                 </Button> */}
-                                567
+                                {items.status}
                         </TableCell>
         
                       </TableRow>)}
