@@ -1,8 +1,18 @@
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import React from 'react'
+import { getUserAssets } from '@/State/Asset/Action'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Portfolio = () => {
+
+  const {asset} = useSelector(store=>store)
+    const dispatch = useDispatch();
+
+    useEffect(()=>{
+      dispatch(getUserAssets(localStorage.getItem("jwt")));
+    },[])
+
   return (
     <div className='p-5 lg:p-20'>
       <h1 className='font-bold text-3xl pb-5'>Portfolio</h1>
@@ -18,22 +28,22 @@ const Portfolio = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {[1,1,1,1,1,1,1,1,1,1].map((items,index)=><TableRow key={index}>
+          {asset.userAssets?.map((items,index)=><TableRow key={index}>
             <TableCell className="font-medium">
               <div className="flex items-center gap-2">
                 <Avatar className="w-8 h-8">
-                  <AvatarImage src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png" />
+                  <AvatarImage src={items.coin.image} />
                 </Avatar>
-                <span>BitCoin</span>
+                <span>{items.coin.name}</span>
               </div>
             </TableCell>
 
-            <TableCell>BTC</TableCell>
-            <TableCell>98762543</TableCell>
-            <TableCell>1276376872</TableCell>
-            <TableCell>-0.2009</TableCell>
+            <TableCell>{items.coin.symbol.toUpperCase()}</TableCell>
+            <TableCell>{items.quantity}</TableCell>
+            <TableCell>{items.coin.price_change_24h}</TableCell>
+            <TableCell>{items.coin.price_change_percentage_24h}</TableCell>
 
-            <TableCell className="text-right">$69295</TableCell>
+            <TableCell className="text-right">${items.coin.total_volume}</TableCell>
           </TableRow>)}
         </TableBody>
       </Table>
